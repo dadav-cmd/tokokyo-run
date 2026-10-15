@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>名所と歴史 | 皇居ランマップ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="common.css">
+<style>
+:root{padding-top:env(safe-area-inset-top,0px)}
+.views{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:18px 0 6px}
+.views .lbl{font-size:.8rem;color:var(--muted);margin-right:4px}
+.intro{font-size:.88rem;color:var(--muted);margin:4px 0 0;max-width:66ch}
+.group{margin-top:30px}
+.group h2{font-size:1.05rem;margin:0 0 2px;display:flex;align-items:baseline;gap:10px}
+.group h2 .num{font-size:.8rem;color:var(--muted);font-weight:400}
+.group>p{margin:0 0 12px;font-size:.86rem;color:var(--muted);max-width:66ch}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:760px){.cards{grid-template-columns:minmax(0,1fr)}}
+.sight{padding:16px 18px;display:flex;flex-direction:column;gap:8px;scroll-margin-top:72px;min-width:0}
+.sight:target,.sight.hl{border-color:var(--moat);box-shadow:0 0 0 2px var(--moat-soft)}
+.sight header{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 12px;align-items:baseline}
+.sight .no{grid-row:span 2;font-family:var(--font-num);font-size:.85rem;color:var(--moat);min-width:1.6em}
+.sight h3{margin:0;font-size:1.12rem;line-height:1.4}
+.sight .kana{font-size:.76rem;color:var(--muted)}
+.sight .chips{display:flex;flex-wrap:wrap;gap:6px}
+.sight p{margin:0;font-size:.92rem}
+.sight .look{font-size:.86rem;border-left:2px solid var(--moat);padding-left:10px;color:var(--fg)}
+.sight .look b{font-weight:500;color:var(--moat);margin-right:6px}
+.sight footer{margin-top:auto;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:.84rem;color:var(--muted);padding-top:4px}
+.sight footer a{margin-left:auto}
+</style></head><body>
+<header id="sitenav" data-page="sights"></header>
+<div class="wrap">
+  <h1>名所と歴史</h1>
+  <p class="lead">皇居ランのコース沿いから周辺まで、25か所の名所を紹介します。走りながら見えるポイントと、知っておくと楽しい歴史をまとめました。</p>
+  <div class="views" role="group" aria-label="並べ方">
+    <span class="lbl">並べ方</span>
+    <button type="button" data-view="area" aria-pressed="true">エリア別</button>
+    <button type="button" data-view="era" aria-pressed="false">時代順</button>
+    <button type="button" data-view="gate" aria-pressed="false">門めぐり</button>
+  </div>
+  <p id="intro" class="intro"></p>
+  <div id="list"></div>
+  <p class="note" style="margin-top:28px">名所の位置は概略です。年代や由来は諸説あるものを含みます。公開日や休館日は変わることがあるため、訪れる前に各施設の公式情報を確認してください。</p>
+</div>
+<script src="data.js"></script>
+<script src="nav.js"></script>
+<script>
+const {PTS,SIGHTS,AREAS,ERAS}=KR,TOTAL=KR.TOTAL_KM,M=111320,cosL=Math.cos(35.684*Math.PI/180);
+// 周回沿いの名所に「桜田門から何km地点か」を付ける
+const hav=(a,b)=>Math.hypot((b[0]-a[0])*M,(b[1]-a[1])*M*cosL);
+const cum=[0];for(let i=1;i<PTS.length;i++)cum.push(cum[i-1]+hav(PTS[i-1],PTS[i]));
+const D=cum.map(v=>v/cum[cum.length-1]*TOTAL);
+function nearestKm(lat,lng){let best=0,bd=1e12;for(let i=1;i<PTS.length;i++){for(let t=0;t<=1;t+=0.02){
+  const la=PTS[i-1][0]+(PTS[i][0]-PTS[i-1][0])*t,lo=PTS[i-1][1]+(PTS[i][1]-PTS[i-1][1])*t,d=hav([la,lo],[lat,lng]);
+  if(d<bd){bd=d;best=D[i-1]+(D[i]-D[i-1])*t;}}}return best;}
+SIGHTS.forEach((s,i)=>{s.idx=i;if(s.area==="loop"&&s.km==null)s.km=nearestKm(s.lat,s.lng);});
+const byKm=(a,b)=>(a.km??99)-(b.km??99);
+const MONTH=m=>m+"月";
+
+const VIEWS={
+ area:{intro:"周回コースを桜田門から反時計回りにたどる順に並べています。寄り道・周辺の名所は、ラン後の散策や次回のコース選びに。",
+  groups:()=>[
+   ["loop","周回沿い","走りながら見える名所。桜田門からの距離順。",SIGHTS.filter(s=>s.area==="loop").sort(byKm)],
+   ["detour","寄り道","コースから数百m以内。ラン後に歩いて立ち寄れる。",SIGHTS.filter(s=>s.area==="detour")],
+   ["around","周辺","日比谷・丸の内・九段など、皇居の外側の名所。",SIGHTS.filter(s=>s.area==="around")]]},
+ era:{intro:"江戸城の時代から、近代国家の首都として整えられた明治・大正、戦後の昭和以降へ。皇居の周りには400年分の歴史が重なっています。",
+  groups:()=>[
+   ["edo","江戸","江戸城の門・櫓・堀。多くが国の重要文化財。",SIGHTS.filter(s=>s.era==="edo")],
+   ["meiji","明治・大正","皇居と官庁街、東京駅など、近代の首都の顔が生まれた時代。",SIGHTS.filter(s=>s.era==="meiji")],
+   ["showa","昭和以降","戦後に整備された公園や施設。",SIGHTS.filter(s=>s.era==="showa")]]},
+ gate:{intro:"江戸城の門を9つ、周回コースの順にめぐります。周回沿いの7門を1周で見たあと、北の丸の清水門・田安門へ寄り道するルートです。",
+  groups:()=>[["gate","門めぐり","番号順にたどると、1周+寄り道で9つの門を回れる。",
+   [...SIGHTS.filter(s=>s.gate&&s.area==="loop").sort(byKm),...SIGHTS.filter(s=>s.gate&&s.area!=="loop").sort((a,b)=>a.lat-b.lat)]]]}
+};
+
+function card(s,n){
+  const pos=s.area==="loop"?`周回 約<span class="num">${s.km.toFixed(1)}</span>km地点`:AREAS[s.area];
+  return `<article class="panel sight" id="${s.id}">
+   <header><span class="no">${String(n).padStart(2,"0")}</span><h3>${s.name}</h3><span class="kana">${s.kana}</span></header>
+   <div class="chips"><span class="chip">${pos}</span><span class="chip">${ERAS[s.era]}</span>${s.gate?'<span class="chip">門</span>':''}</div>
+   <p>${s.text}</p>
+   <p class="look"><b>見どころ</b>${s.look}</p>
+   <footer>${s.months?`<span>見頃 ${s.months.map(MONTH).join("・")}</span>`:""}<a href="map.html#${s.id}">地図で見る</a></footer>
+  </article>`;}
+
+const list=document.getElementById("list"),intro=document.getElementById("intro");
+function show(v){
+  document.querySelectorAll("[data-view]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.view===v));
+  intro.textContent=VIEWS[v].intro;
+  let n=0;
+  list.innerHTML=VIEWS[v].groups().map(([k,t,d,items])=>`<section class="group"><h2>${t}<span class="num">${items.length}か所</span></h2><p>${d}</p>
+    <div class="cards">${items.map(s=>card(s,++n)).join("")}</div></section>`).join("");
+  try{localStorage.setItem("kokyo-view",v)}catch(e){}
+}
+document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>show(b.dataset.view));
+let v="area";try{v=localStorage.getItem("kokyo-view")||"area"}catch(e){}
+const h=location.hash.slice(1);
+if(h&&v==="gate"&&!SIGHTS.find(s=>s.id===h&&s.gate))v="area";
+show(VIEWS[v]?v:"area");
+if(h){const t=document.getElementById(h);if(t){t.classList.add("hl");requestAnimationFrame(()=>t.scrollIntoView({block:"start"}));}}
+</script>
+</body></html>

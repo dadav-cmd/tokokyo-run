@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>季節カレンダー | 皇居ランマップ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="common.css">
+<style>
+:root{padding-top:env(safe-area-inset-top,0px);--warn:#a8642a;--warn-soft:#f5e9de}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--warn:#e0a26b;--warn-soft:#33281f}}
+:root[data-theme="dark"]{--warn:#e0a26b;--warn-soft:#33281f}
+.strip{margin-top:20px;padding:16px 18px 12px}
+.strip h2{font-size:.78rem;letter-spacing:.08em;color:var(--muted);font-weight:500;margin:0 0 10px}
+.tl{overflow-x:auto}
+.tl-in{min-width:560px;display:grid;grid-template-columns:110px repeat(24,minmax(0,1fr));row-gap:6px;align-items:center;font-size:.8rem}
+.tl-m{text-align:center;color:var(--muted);font-family:var(--font-num);font-size:.75rem;grid-column:span 2;border-left:1px solid var(--line)}
+.tl-m.now{color:var(--moat);font-weight:500}
+.tl-l{color:var(--fg);padding-right:8px;white-space:nowrap}
+.tl-b{height:14px;border-radius:7px;background:var(--moat)}
+.tl-b.warn{background:var(--warn)}
+.tl-k{font-size:.74rem;color:var(--muted);margin-top:8px}
+.months{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:22px}
+@media (max-width:900px){.months{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.months{grid-template-columns:minmax(0,1fr)}}
+.mon{padding:16px 18px;display:flex;flex-direction:column;gap:8px;scroll-margin-top:72px;min-width:0}
+.mon.now{border-color:var(--moat);box-shadow:0 0 0 2px var(--moat-soft)}
+.mon header{display:flex;align-items:baseline;gap:10px}
+.mon .mn{font-family:var(--font-num);font-size:1.9rem;line-height:1;color:var(--moat)}
+.mon .mn small{font-family:var(--font-body);font-size:.9rem;margin-left:1px}
+.mon h3{margin:0;font-size:1rem}
+.mon .badge{margin-left:auto;font-size:.72rem;color:var(--surface);background:var(--moat);border-radius:999px;padding:1px 8px}
+.mon dl{margin:0;display:grid;gap:6px}
+.mon dt{font-size:.74rem;color:var(--muted);letter-spacing:.06em}
+.mon dd{margin:0;font-size:.9rem}
+.mon dd.c{border-left:2px solid var(--warn);padding-left:8px}
+.mon .links{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:.86rem;margin-top:auto}
+.sources{margin-top:32px;font-size:.82rem;color:var(--muted)}
+.sources h2{font-size:.95rem;color:var(--fg)}
+</style></head><body>
+<header id="sitenav" data-page="season"></header>
+<div class="wrap">
+  <h1>季節カレンダー</h1>
+  <p class="lead">月ごとの見どころと、走るときの注意点をまとめました。今月のカードには印が付きます。</p>
+
+  <div class="panel strip">
+    <h2>見頃と注意の時期(例年の目安、半月単位)</h2>
+    <div class="tl"><div class="tl-in" id="tl"></div></div>
+    <p class="tl-k">緑は見どころ、茶色は暑さに注意する時期。年によって前後します。</p>
+  </div>
+
+  <div class="months" id="months"></div>
+
+  <section class="sources">
+    <h2>出典</h2>
+    <ul>
+      <li><a href="https://visit-chiyoda.tokyo/app/event/detail/895" target="_blank" rel="noopener">令和8年春季皇居乾通り一般公開|千代田区観光協会</a></li>
+      <li><a href="https://www.env.go.jp/garden/kokyogaien/news/2019/11/1129.html" target="_blank" rel="noopener">北の丸公園の紅葉情報|環境省 皇居外苑</a>(例年の見頃)</li>
+      <li><a href="https://kikuyou.or.jp/pdf/pamphlet/202407/kokyo.pdf" target="_blank" rel="noopener">皇居東御苑のご案内|菊葉文化協会</a>(公開時間と休園日)</li>
+      <li><a href="https://www.env.go.jp/garden/kokyogaien/2_guide/running.html" target="_blank" rel="noopener">皇居ラン(マラソン)について|環境省 皇居外苑</a>(観桜期の団体利用)</li>
+    </ul>
+    <p>情報は2026年10月時点で確認したものです。日没の時刻は東京のおおよその値です。</p>
+  </section>
+</div>
+<script src="data.js"></script>
+<script src="nav.js"></script>
+<script>
+const {MONTHS,SIGHTS}=KR,SBY=Object.fromEntries(SIGHTS.map(s=>[s.id,s]));
+const now=new Date().getMonth()+1;
+// 半月インデックス: 1月上旬=0 … 12月下旬=23
+const hm=(m,half)=>(m-1)*2+half;
+const BANDS=[["梅",hm(2,1),hm(3,0)],["桜",hm(3,1),hm(4,0)],["新緑",hm(4,1),hm(5,1)],["花菖蒲",hm(6,0),hm(6,1)],
+  ["暑さに注意",hm(7,0),hm(8,1),"warn"],["イチョウ・紅葉",hm(11,1),hm(12,0)]];
+const tl=document.getElementById("tl");
+let h='<span></span>';for(let m=1;m<=12;m++)h+=`<span class="tl-m${m===now?" now":""}">${m}月</span>`;
+BANDS.forEach(([n,a,b,c],i)=>{const r=i+2;h+=`<span class="tl-l" style="grid-row:${r};grid-column:1">${n}</span><span class="tl-b${c?" warn":""}" style="grid-row:${r};grid-column:${a+2}/${b+3}" title="${n}"></span>`;});
+tl.innerHTML=h;
+
+document.getElementById("months").innerHTML=MONTHS.map(x=>`
+ <article class="panel mon${x.m===now?" now":""}" id="m${x.m}">
+  <header><span class="mn">${x.m}<small>月</small></span><h3>${x.title}</h3>${x.m===now?'<span class="badge">今月</span>':""}</header>
+  <dl><dt>見どころ</dt><dd>${x.see}</dd><dt>走るときの注意</dt><dd class="c">${x.caution}</dd></dl>
+  <div class="links">${x.sights.map(id=>SBY[id]?`<a href="sights.html#${id}">${SBY[id].name}</a>`:"").join("")}</div>
+ </article>`).join("");
+</script>
+</body></html>

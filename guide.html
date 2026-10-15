@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>走り方ガイド | 皇居ランマップ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="common.css">
+<style>
+:root{padding-top:env(safe-area-inset-top,0px)}
+.jump{display:flex;gap:8px;margin:16px 0 0;flex-wrap:wrap}
+.jump a{font-size:.88rem;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:5px 14px;color:var(--fg);background:var(--surface)}
+.jump a:hover{border-color:var(--moat)}
+.part{margin-top:36px}
+.part>h2{font-size:1.3rem;margin:0 0 4px;display:flex;align-items:baseline;gap:10px;scroll-margin-top:72px}
+.part>h2 small{font-size:.82rem;font-weight:400;color:var(--muted)}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:14px}
+@media (max-width:760px){.cols{grid-template-columns:minmax(0,1fr)}}
+.box{padding:18px 20px;min-width:0}
+.box.wide{grid-column:1/-1}
+.box h3{margin:0 0 8px;font-size:1.05rem}
+.box p{margin:0 0 8px;font-size:.92rem;max-width:68ch}
+.box ul,.box ol{margin:0;padding-left:1.2em;font-size:.92rem}
+.box li{margin:4px 0}
+.box li small{color:var(--muted);font-size:.78rem;margin-left:4px}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:4px}
+@media (max-width:520px){.facts{grid-template-columns:minmax(0,1fr)}}
+.fact{border-top:2px solid var(--moat);padding-top:8px}
+.fact b{display:block;font-size:1.4rem;line-height:1.3;font-family:var(--font-num);font-weight:500}
+.fact b span{font-family:var(--font-body);font-size:.9rem;font-weight:700;margin-left:2px}
+.fact p{font-size:.84rem;color:var(--muted);margin:2px 0 0}
+.alert{border:1px solid var(--moat);background:var(--moat-soft);border-radius:8px;padding:10px 14px;font-size:.88rem;margin-top:12px}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.88rem}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:500;color:var(--muted);font-size:.78rem;letter-spacing:.04em;white-space:nowrap}
+td.n,th.n{text-align:right;font-family:var(--font-num);font-variant-numeric:tabular-nums;white-space:nowrap}
+td a{white-space:nowrap}
+.sources{margin-top:36px;font-size:.82rem;color:var(--muted)}
+.sources h2{font-size:.95rem;color:var(--fg)}
+.sources li{margin:3px 0}
+</style></head><body>
+<header id="sitenav" data-page="guide"></header>
+<div class="wrap">
+  <h1>走り方ガイド</h1>
+  <p class="lead">初めての人は前半の初心者編から。いつも走っている人は後半の常連編で、区間の攻略や混雑の傾向をどうぞ。</p>
+  <nav class="jump" aria-label="ページ内"><a href="#beginner">初心者編</a><a href="#regular">常連編</a><a href="#sources">出典</a></nav>
+
+  <section class="part">
+    <h2 id="beginner">初心者編<small>はじめて走る前に</small></h2>
+    <div class="cols">
+      <div class="panel box wide">
+        <h3>皇居ランの基本</h3>
+        <div class="facts">
+          <div class="fact"><b>約5<span>km</span></b><p>1周の距離。資料によって5.0〜5.3kmと幅がある。</p></div>
+          <div class="fact"><b>0<span>か所</span></b><p>コース上の信号。止まらずに走り続けられる。</p></div>
+          <div class="fact"><b>反時計回り</b><p>皇居を左手に見ながら走る。皇居外苑の案内でも反時計回りの通行が示されている。</p></div>
+        </div>
+      </div>
+
+      <div class="panel box wide">
+        <h3>マナー</h3>
+        <p>皇居の周りは、観光客や通勤の人も通る歩道です。ランナー専用のコースではありません。</p>
+        <ul>
+          <li>歩行者を最優先にし、すぐ横を高速ですり抜けない。</li>
+          <li>反時計回りで走り、逆走しない。<small>皇居外苑</small></li>
+          <li>追い越すときは周囲の安全を確かめ、原則として右側から。狭い場所では無理に追い越さない。<small>皇居外苑</small></li>
+          <li>追い越すときは「すみません」とひと声かける。<small>GO TOKYO</small></li>
+          <li>仲間と走るときは横に広がらず、縦に並ぶ。</li>
+          <li>皇居外苑の砂利の広場では走らない。外苑のトイレや休憩所で着替えない。<small>皇居外苑</small></li>
+        </ul>
+        <div class="alert">2026年10月、歩行者との接触や逆走などの訴えを受けて、千代田区が皇居ランの実態調査に乗り出すと報じられました。ランナー一人ひとりのマナーが問われています。</div>
+      </div>
+
+      <div class="panel box">
+        <h3>ランステ(ランニングステーション)の使い方</h3>
+        <p>着替え、荷物の預け入れ、シャワーができる有料の施設です。半蔵門・麹町・永田町など、コースの近くに複数あります。</p>
+        <p>選ぶときに見るポイント:</p>
+        <ul>
+          <li>スタートしたい地点や駅からの近さ</li>
+          <li>ロッカーの大きさ(通勤かばんが入るか)</li>
+          <li>シャワーの有無、タオルの貸し出し</li>
+          <li>料金の体系(1回利用、回数券、月額会員)</li>
+        </ul>
+        <p style="margin-top:8px">料金や営業時間は変わることがあるため、各施設の公式サイトで確認してください。近くの銭湯を使う方法もあります。</p>
+      </div>
+
+      <div class="panel box">
+        <h3>持ち物と服装</h3>
+        <ul>
+          <li>交通系ICカードか少額の現金(飲み物を買う、ランステの支払い)</li>
+          <li>ロッカーの鍵を入れられるポケットかポーチ</li>
+          <li>夜は反射材やライト。歩行者や自転車から見えるように</li>
+          <li>夏は飲み物と帽子。冬は手袋と薄手の上着</li>
+        </ul>
+        <p style="margin-top:8px">沿道には水飲み場とトイレがあります。場所はコースマップに追加していく予定です。</p>
+      </div>
+
+      <div class="panel box wide">
+        <h3>最寄り駅とスタート地点</h3>
+        <p>どこからでも走り始められます。周回の途中で終わっても、近くの駅から帰れます。</p>
+        <div class="tbl"><table>
+          <thead><tr><th>スタート地点</th><th>最寄り駅</th><th>この先の区間</th></tr></thead>
+          <tbody>
+            <tr><td>桜田門</td><td>桜田門駅(東京メトロ有楽町線)</td><td>区間1 平坦な外苑沿い</td></tr>
+            <tr><td>二重橋前</td><td>二重橋前駅(東京メトロ千代田線)、東京駅(丸の内側)</td><td>区間2 平坦な直線</td></tr>
+            <tr><td>大手門</td><td>大手町駅(東京メトロ各線、都営三田線)</td><td>区間3 平坦〜ゆるい上り</td></tr>
+            <tr><td>竹橋</td><td>竹橋駅(東京メトロ東西線)</td><td>区間4 すぐに上り坂</td></tr>
+            <tr><td>半蔵門</td><td>半蔵門駅(東京メトロ半蔵門線)</td><td>区間6 長い下り</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="part">
+    <h2 id="regular">常連編<small>もっと楽しく、速く</small></h2>
+    <div class="cols">
+      <div class="panel box wide">
+        <h3>区間ごとの攻略</h3>
+        <div class="tbl"><table id="segtable">
+          <thead><tr><th>区間</th><th class="n">距離</th><th>坂</th><th>走り方</th></tr></thead><tbody></tbody>
+        </table></div>
+        <p style="margin-top:10px">標高のグラフと地図は<a href="map.html">コースマップ</a>で確認できます。</p>
+      </div>
+
+      <div class="panel box">
+        <h3>混雑しやすい時間と場所</h3>
+        <ul>
+          <li><b>平日の夕方〜夜</b>:仕事帰りのランナーが多い。早朝は比較的空いている。</li>
+          <li><b>区間1・2の日中</b>:二重橋を訪れる観光客が多い。</li>
+          <li><b>3月下旬〜4月上旬</b>:千鳥ヶ淵の周辺(区間5)が花見客で埋まる。</li>
+          <li><b>日曜10時〜16時</b>:内堀通りの平川門交差点〜祝田橋交差点(往復約3km)が、自転車で走れる「パレスサイクリングコース」になる。交差点を渡るときは自転車に注意。悪天候や年末年始などは休止。</li>
+        </ul>
+      </div>
+
+      <div class="panel box">
+        <h3>ペースの目安(1周5kmとして)</h3>
+        <div class="tbl"><table id="pacetable">
+          <thead><tr><th>1kmあたり</th><th class="n">1周</th><th class="n">2周</th><th class="n">3周</th></tr></thead><tbody></tbody>
+        </table></div>
+      </div>
+
+      <div class="panel box">
+        <h3>コースのバリエーション</h3>
+        <ul>
+          <li><b>北の丸公園を加える</b>:竹橋から清水門をくぐって公園へ入り、田安門の方向から代官町通りへ戻る。園内は散策の人も多いので、ゆっくりと。</li>
+          <li><b>日比谷公園まで足を延ばす</b>:桜田門から祝田橋を渡ってすぐ。クールダウンのジョグに向く。</li>
+          <li><b>千鳥ヶ淵緑道</b>:歩いて景色を楽しむ道。特に桜の時期は走らずに歩く。</li>
+        </ul>
+        <p style="margin-top:8px">皇居東御苑は散策のための庭園です。ラン後に歩いて回りましょう。</p>
+      </div>
+
+      <div class="panel box">
+        <h3>仲間と大勢で走るとき</h3>
+        <p>20名以上の団体で皇居外苑を使う場合は、皇居外苑の取扱いに従います。主な点は次のとおりです。</p>
+        <ul>
+          <li>集合場所は桜田門前の広場(立入禁止区域を除く)</li>
+          <li>1回のスタートは100名まで、次のスタートまで5分以上あける</li>
+          <li>3月15日〜4月15日の観桜期などは団体利用ができない</li>
+        </ul>
+        <p style="margin-top:8px">問い合わせ:皇居外苑 <span class="num">03-3231-5509</span>(平日8:30〜17:00)</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sources" id="sources">
+    <h2>出典</h2>
+    <ul>
+      <li><a href="https://www.env.go.jp/garden/kokyogaien/2_guide/running.html" target="_blank" rel="noopener">皇居ラン(マラソン)について|環境省 皇居外苑</a>(周回方向、追い越し、団体利用の取扱い)</li>
+      <li><a href="https://www.gotokyo.org/jp/story/guide/running-course-guide-for-runners/index.html" target="_blank" rel="noopener">GO TOKYO 東京のランニングコースガイド</a>(距離、ランステ、混雑の傾向、声かけ)</li>
+      <li><a href="https://www.keishicho.metro.tokyo.lg.jp/kotsu/doro/cycle.html" target="_blank" rel="noopener">パレスサイクリングコース|警視庁</a>(実施日時と区間)</li>
+      <li><a href="https://news.web.nhk/newsweb/na/nd-20261006de54956" target="_blank" rel="noopener">「皇居ラン」のマナー違反受け 千代田区が実態調査へ|NHK(2026年10月6日)</a></li>
+    </ul>
+    <p>情報は2026年10月時点で確認したものです。</p>
+  </section>
+</div>
+<script src="data.js"></script>
+<script src="nav.js"></script>
+<script>
+const {PTS,SEGS}=KR,TOTAL=KR.TOTAL_KM,M=111320,cosL=Math.cos(35.684*Math.PI/180);
+const hav=(a,b)=>Math.hypot((b[0]-a[0])*M,(b[1]-a[1])*M*cosL);
+const cum=[0];for(let i=1;i<PTS.length;i++)cum.push(cum[i-1]+hav(PTS[i-1],PTS[i]));
+const D=cum.map(v=>v/cum[cum.length-1]*TOTAL);
+document.querySelector("#segtable tbody").innerHTML=SEGS.map((s,i)=>
+  `<tr><td>${i+1} ${s.name}</td><td class="n">${(D[s.to]-D[s.from]).toFixed(1)} km</td><td>${s.slope}</td><td>${s.text}</td></tr>`).join("");
+const fmt=sec=>{sec=Math.round(sec);const h=Math.floor(sec/3600),m=Math.floor(sec%3600/60),s=sec%60;
+  return (h?h+":"+String(m).padStart(2,"0"):m)+":"+String(s).padStart(2,"0");};
+document.querySelector("#pacetable tbody").innerHTML=[300,330,360,390,420].map(p=>
+  `<tr><td class="num">${fmt(p)} /km</td>${[1,2,3].map(n=>`<td class="n">${fmt(p*5*n)}</td>`).join("")}</tr>`).join("");
+</script>
+</body></html>

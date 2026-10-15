@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>皇居ランマップ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="common.css">
+<style>
+:root{padding-top:env(safe-area-inset-top,0px)}
+/* Layout: 左にキャッチコピーと基本情報、右にお堀と周回コースの小さな地図。下に3つの入口と今月の見どころ */
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px;align-items:center;padding-block:18px 8px}
+@media (max-width:820px){.hero{grid-template-columns:minmax(0,1fr);gap:16px}}
+.eyebrow{font-size:.78rem;letter-spacing:.14em;color:var(--moat);font-weight:500;margin:0 0 10px}
+.hero h1{font-size:clamp(1.9rem,4.6vw,2.9rem);font-weight:900;line-height:1.3;letter-spacing:.01em}
+.hero h1 em{font-style:normal;color:var(--moat)}
+.hero h1 .ph{display:inline-block}
+.hero .lead{font-size:1rem;margin-top:14px}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:22px;max-width:520px}
+.fact{border-top:2px solid var(--moat);padding-top:8px}
+.fact b{display:block;font-family:var(--font-num);font-weight:500;font-size:1.45rem;line-height:1.25}
+.fact b span{font-family:var(--font-body);font-size:.85rem;font-weight:700;margin-left:2px}
+.fact b.jp{font-family:var(--font-body);font-size:1.2rem;font-weight:700;line-height:1.5}
+.fact p{margin:2px 0 0;font-size:.8rem;color:var(--muted);line-height:1.5}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.btn{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-size:.92rem;border-radius:999px;padding:9px 18px;border:1px solid var(--moat)}
+.btn.primary{background:var(--moat);color:var(--surface)}
+.btn.ghost{color:var(--moat);background:var(--surface)}
+.mini{display:block;padding:8px;text-decoration:none}
+.mini svg{display:block;width:100%;height:auto;border-radius:6px}
+.mini figcaption{display:flex;justify-content:space-between;gap:10px;font-size:.8rem;color:var(--muted);padding:8px 6px 2px}
+.mini:hover{border-color:var(--moat)}
+
+.sec{margin-top:44px}
+.sec>h2{font-size:1.2rem;margin:0 0 4px}
+.sec>p{margin:0 0 14px;color:var(--muted);font-size:.9rem}
+.doors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:820px){.doors{grid-template-columns:minmax(0,1fr)}}
+.door{padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.door h3{margin:0;font-size:1.08rem}
+.door>p{margin:0;font-size:.9rem;color:var(--muted)}
+.door ol{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-direction:column;gap:6px;counter-reset:st}
+.door li{counter-increment:st;display:grid;grid-template-columns:24px minmax(0,1fr);gap:8px;align-items:start}
+.door li::before{content:counter(st);font-family:var(--font-num);font-size:.78rem;color:var(--surface);background:var(--moat);
+  border-radius:50%;width:22px;height:22px;display:grid;place-items:center;margin-top:1px}
+.door li a{font-weight:500}
+.door li small{display:block;color:var(--muted);font-size:.8rem;line-height:1.5}
+
+.month{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 24px;padding:20px 22px;align-items:start}
+@media (max-width:640px){.month{grid-template-columns:minmax(0,1fr)}}
+.month .mn{font-family:var(--font-num);font-size:3.2rem;line-height:1;color:var(--moat)}
+.month .mn small{font-family:var(--font-body);font-size:1rem;margin-left:2px}
+.month h3{margin:0 0 6px;font-size:1.1rem}
+.month p{margin:0 0 8px;font-size:.92rem;max-width:66ch}
+.month .c{border-left:2px solid var(--moat);padding-left:10px;color:var(--fg)}
+.month .links{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.88rem}
+.manner{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;padding:14px 18px;border:1px solid var(--moat);background:var(--moat-soft);border-radius:10px;margin-top:44px}
+.manner b{font-size:.95rem}
+.manner span{font-size:.88rem;flex:1 1 280px;min-width:0}
+.foot{margin-top:40px;border-top:1px solid var(--line);padding-top:14px}
+</style></head><body>
+
+<header id="sitenav" data-page="home"></header>
+<div class="wrap">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">皇居ラン情報サイト</p>
+      <h1><span class="ph">お堀に沿って、</span><span class="ph"><em>信号のない</em></span><span class="ph"><em>約5km</em>を走る。</span></h1>
+      <p class="lead">初めての1周から、いつものランをもっと楽しくするヒントまで。コース、江戸城の名所、季節の見どころをまとめました。</p>
+      <div class="facts">
+        <div class="fact"><b>約5<span>km</span></b><p>1周の距離</p></div>
+        <div class="fact"><b>0<span>か所</span></b><p>コース上の信号</p></div>
+        <div class="fact"><b class="jp">反時計回り</b><p>皇居を左手に</p></div>
+      </div>
+      <div class="cta">
+        <a class="btn primary" href="map.html">コースマップを見る</a>
+        <a class="btn ghost" href="guide.html#beginner">はじめての方へ</a>
+      </div>
+    </div>
+    <a class="panel mini" href="map.html" aria-label="コースマップを開く">
+      <svg id="mini" viewBox="0 0 440 400" role="img" aria-label="皇居の周回コースの概略図"></svg>
+      <figcaption><span>桜田門から反時計回りの1周</span><span>コースマップへ →</span></figcaption>
+    </a>
+  </section>
+
+  <section class="sec">
+    <h2>どこから読む?</h2>
+    <p>目的に合わせて、おすすめの順番で案内します。</p>
+    <div class="doors">
+      <div class="panel door">
+        <h3>はじめて走る</h3>
+        <p>ルールと準備を確かめてから、1周の流れをつかむ。</p>
+        <ol>
+          <li><span><a href="guide.html#beginner">走り方ガイド 初心者編</a><small>マナー、ランステ、持ち物、最寄り駅</small></span></li>
+          <li><span><a href="map.html">コースマップ</a><small>6つの区間と、坂のある場所</small></span></li>
+        </ol>
+      </div>
+      <div class="panel door">
+        <h3>いつも走っている</h3>
+        <p>区間ごとの坂と混雑を知って、走り方を組み立てる。</p>
+        <ol>
+          <li><span><a href="map.html">コースマップ</a><small>区間の解説と高低差グラフ</small></span></li>
+          <li><span><a href="guide.html#regular">走り方ガイド 常連編</a><small>混雑する時間、ペース表、バリエーション</small></span></li>
+        </ol>
+      </div>
+      <div class="panel door">
+        <h3>観光も楽しみたい</h3>
+        <p>走りながら見える名所と、その歴史を知る。</p>
+        <ol>
+          <li><span><a href="sights.html">名所と歴史</a><small>25か所、門めぐりのルート</small></span></li>
+          <li><span><a href="season.html">季節カレンダー</a><small>桜・新緑・紅葉の時期</small></span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>今月の見どころ</h2>
+    <p id="monthNote">季節カレンダーから、今月の情報を表示しています。</p>
+    <div class="panel month" id="month"></div>
+  </section>
+
+  <div class="manner">
+    <b>走る前にひとつだけ</b>
+    <span>皇居の周りはランナー専用ではありません。歩行者を優先し、反時計回りで、追い越しは声をかけてから。</span>
+    <a href="guide.html#beginner">マナーを読む</a>
+  </div>
+
+  <p class="note foot">仲間内で使うための試作版です。地図、距離、名所の位置は概略で、標高は仮の値です。公開日や料金などは変わることがあるため、各公式情報を確認してください。情報は2026年10月時点のものです。</p>
+</div>
+
+<script src="data.js"></script>
+<script src="basemap.js"></script>
+<script src="nav.js"></script>
+<script>
+// ---- 今月の見どころ ----
+(function(){
+  const {MONTHS,SIGHTS}=KR,SBY=Object.fromEntries(SIGHTS.map(s=>[s.id,s]));
+  const m=new Date().getMonth()+1,x=MONTHS.find(v=>v.m===m)||MONTHS[0];
+  document.getElementById("month").innerHTML=`<div class="mn">${x.m}<small>月</small></div>
+   <div><h3>${x.title}</h3><p>${x.see}</p><p class="c">${x.caution}</p>
+   <div class="links">${x.sights.map(id=>SBY[id]?`<a href="sights.html#${id}">${SBY[id].name}</a>`:"").join("")}<a href="season.html#m${x.m}">季節カレンダーで見る</a></div></div>`;
+})();
+
+// ---- 小さな地図(コースマップと同じデータで描く) ----
+(function(){
+  const {PTS}=KR,B=window.KR_BASE,svg=document.getElementById("mini"),W=440,H=400,NS="http://www.w3.org/2000/svg";
+  const M=111320,cosL=Math.cos(35.684*Math.PI/180);
+  const xs=PTS.map(p=>p[1]*cosL*M),ys=PTS.map(p=>p[0]*M);
+  const pad=34,s=Math.min((W-2*pad)/(Math.max(...xs)-Math.min(...xs)),(H-2*pad)/(Math.max(...ys)-Math.min(...ys)));
+  const cx=(Math.max(...xs)+Math.min(...xs))/2,cy=(Math.max(...ys)+Math.min(...ys))/2;
+  const pr=(la,lo)=>[W/2+(lo*cosL*M-cx)*s,H/2-(la*M-cy)*s];
+  const P=a=>a.map(p=>pr(p[0],p[1]).map(v=>v.toFixed(1)).join(",")).join(" ");
+  const el=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e;};
+  el("rect",{width:W,height:H,fill:"var(--land)"});
+  B.greens.forEach(g=>el("polygon",{points:P(g.pts),fill:"var(--park)"}));
+  B.roads.forEach(r=>el("polyline",{points:P(r.pts),stroke:"var(--road)","stroke-width":r.w+2,fill:"none","stroke-linecap":"round"}));
+  el("polygon",{points:P(PTS),fill:"var(--water)"});
+  B.waters.forEach(w=>el("polygon",{points:P(w.pts),fill:"var(--water)"}));
+  el("polygon",{points:P(B.palace),fill:"var(--wood)"});
+  el("polygon",{points:P(B.gaien),fill:"var(--lawn)"});
+  const c=pr(35.6850,139.7522);
+  el("text",{x:c[0],y:c[1],"text-anchor":"middle","font-size":18,fill:"var(--park-ink)","letter-spacing":"8"}).textContent="皇 居";
+  // 周回コース。読み込み時に一度だけ線を引く(動きを減らす設定では静止表示)
+  const route=el("polyline",{points:P(PTS),fill:"none",stroke:"var(--moat)","stroke-width":5,"stroke-linecap":"round","stroke-linejoin":"round"});
+  const reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  try{const len=route.getTotalLength();if(len&&!reduce){route.style.strokeDasharray=len;route.style.strokeDashoffset=len;
+    route.getBoundingClientRect();route.style.transition="stroke-dashoffset 1.6s ease-out";requestAnimationFrame(()=>route.style.strokeDashoffset=0);}}catch(e){}
+  const s0=pr(PTS[0][0],PTS[0][1]);
+  el("rect",{x:s0[0]-7,y:s0[1]-7,width:14,height:14,fill:"var(--fg)"});
+  const t=el("text",{x:s0[0],y:s0[1]-13,"text-anchor":"middle","font-size":12,"font-weight":700,fill:"var(--fg)",
+    style:"paint-order:stroke;stroke:var(--land);stroke-width:4px"});t.textContent="桜田門";
+  [["半蔵門",13,-1],["竹橋",8,1],["大手門",6,1]].forEach(([n,i,dir])=>{const p=pr(PTS[i][0],PTS[i][1]);
+    el("circle",{cx:p[0],cy:p[1],r:3.5,fill:"var(--surface)",stroke:"var(--moat)","stroke-width":2});
+    el("text",{x:p[0]+dir*9,y:p[1]+4,"text-anchor":dir<0?"end":"start","font-size":11.5,fill:"var(--fg)",
+      style:"paint-order:stroke;stroke:var(--land);stroke-width:4px"}).textContent=n;});
+})();
+</script>
+</body></html>

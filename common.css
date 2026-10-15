@@ -1,0 +1,65 @@
+/* 皇居ランマップ 共通スタイル。白地+お堀の深緑1色、数字は等幅 */
+:root{
+  --bg:#f7f8f6; --surface:#ffffff; --fg:#1b2420; --muted:#5f6b66; --line:#dfe4e1;
+  --moat:#2e5e52; --moat-soft:#e3ece8; --palace:#eef3ef; --dim:#b9c3be; --pin:#1b2420;
+  --land:#eef0ec; --water:#c6dbe2; --water-ink:#3f6f80; --wood:#d3e2cb; --lawn:#e1ebd3; --park:#d8e6cd; --park-ink:#4a6b48;
+  --road:#ffffff; --road-case:#d3d8d2; --route:#87938d;
+  --font-body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+  --font-num:"IBM Plex Mono",ui-monospace,"SFMono-Regular",monospace;
+  --nav-h:56px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121715; --surface:#1a201d; --fg:#e6ebe8; --muted:#9aa6a0; --line:#2c3531;
+  --moat:#7fbfa9; --moat-soft:#203029; --palace:#18211d; --dim:#46524c; --pin:#e6ebe8;
+  --land:#161c19; --water:#1d3540; --water-ink:#7fa8b6; --wood:#1b2a1f; --lawn:#212e1f; --park:#1e2b21; --park-ink:#93b08f;
+  --road:#2b3330; --road-case:#3a4440; --route:#7c8983; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121715; --surface:#1a201d; --fg:#e6ebe8; --muted:#9aa6a0; --line:#2c3531;
+  --moat:#7fbfa9; --moat-soft:#203029; --palace:#18211d; --dim:#46524c; --pin:#e6ebe8;
+  --land:#161c19; --water:#1d3540; --water-ink:#7fa8b6; --wood:#1b2a1f; --lawn:#212e1f; --park:#1e2b21; --park-ink:#93b08f;
+  --road:#2b3330; --road-case:#3a4440; --route:#7c8983; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+img{max-width:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:15px;line-height:1.75;margin:0}
+a{color:var(--moat)}
+.wrap{max-width:1120px;margin:0 auto;padding-block:20px 48px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font-size:1.55rem;font-weight:700;margin:0;letter-spacing:.02em;text-wrap:balance;line-height:1.4}
+h2{text-wrap:balance}
+.lead{color:var(--muted);margin:6px 0 0;max-width:62ch}
+.num{font-family:var(--font-num);font-variant-numeric:tabular-nums}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.chip{display:inline-flex;align-items:center;font-size:.76rem;border:1px solid var(--line);border-radius:999px;padding:1px 9px;color:var(--muted);white-space:nowrap}
+.chip.on{border-color:var(--moat);color:var(--moat)}
+button{font:inherit;font-size:.85rem;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 13px;cursor:pointer}
+button:hover{border-color:var(--moat)}
+button[aria-pressed="true"]{background:var(--moat);border-color:var(--moat);color:var(--surface)}
+:focus-visible{outline:2px solid var(--moat);outline-offset:2px}
+.note{font-size:.78rem;color:var(--muted);max-width:70ch}
+
+/* サイトナビ */
+.sitenav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.sitenav .in{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:20px;height:var(--nav-h);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.sitenav .brand{font-weight:700;letter-spacing:.06em;color:var(--fg);text-decoration:none;margin-right:auto;font-size:.95rem}
+.sitenav .brand span{color:var(--moat)}
+.sitenav nav{display:flex;gap:4px}
+.sitenav nav a{color:var(--muted);text-decoration:none;font-size:.88rem;padding:6px 10px;border-radius:6px}
+.sitenav nav a:hover{color:var(--fg);background:var(--moat-soft)}
+.sitenav nav a[aria-current="page"]{color:var(--fg);font-weight:700;box-shadow:inset 0 -2px 0 var(--moat);border-radius:0}
+.sitenav nav a svg{display:none}
+.sitenav .short{display:none}
+@media (max-width:720px){
+  body{padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom,0px))}
+  .sitenav{position:static;border-bottom:0}
+  .sitenav .in{height:48px}
+  .sitenav nav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--surface);border-top:1px solid var(--line);
+    display:grid;grid-template-columns:repeat(5,1fr);gap:0;padding-bottom:env(safe-area-inset-bottom,0px);
+    padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+  .sitenav nav a{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.7rem;padding:7px 2px;border-radius:0}
+  .sitenav nav a svg{display:block;width:20px;height:20px}
+  .sitenav .full{display:none}
+  .sitenav .short{display:inline}
+  .sitenav nav a[aria-current="page"]{box-shadow:inset 0 2px 0 var(--moat);color:var(--moat)}
+}
